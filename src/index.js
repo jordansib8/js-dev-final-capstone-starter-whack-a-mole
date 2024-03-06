@@ -5,7 +5,7 @@ const startButton = document.querySelector('#start');
 const score = document.querySelector('#score');
 const timerDisplay = document.querySelector('#timer');
 
-let time = 20;
+let time = 15;
 let timer;
 let lastHole = 0;
 let points = 0;
@@ -247,7 +247,7 @@ function setDuration(duration) {
 function stopGame(){
   // stopAudio(song);  //optional
   clearInterval(timer);
-  time = 20; 
+  time = 15; 
   return "game stopped";
 }
 
