@@ -2,14 +2,14 @@ const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
 // TODO: Add the missing query selectors:
-const score = document.querySelector("#score");
-const timerDisplay = document.querySelector("#timer");
+const score = document.querySelector('#score');
+const timerDisplay = document.querySelector('#timer');
 
-let time = 15;
+let time = 20;
 let timer;
 let lastHole = 0;
 let points = 0;
-let difficulty = "hard";
+let difficulty = "normal";
 
 /**
  * Generates a random integer within a range.
@@ -46,7 +46,7 @@ function setDelay(difficulty) {
   else if (difficulty === "normal"){
     return 1000;
   }
-  else (difficulty === hard){
+  else {
     return randomInteger(600,1200);
   }
 }
@@ -97,10 +97,11 @@ function chooseHole(holes) {
 */
 function gameOver() {
   if (time > 0) {
-  timeoutId = showUp();
-    return timeoutId;
+      timeoutId = showUp();
+      return timeoutId;
   }
-  else {gameStopped = stopGame();
+  else {
+    gameStopped = stopGame();
     return gameStopped; 
   }
 }
@@ -129,10 +130,10 @@ function showUp() {
 *
 */
 function showAndHide(hole, delay){
-  toggleVisibility ("show");
+  toggleVisibility (hole);
   
   const timeoutID = setTimeout(() => {
-    toggleVisibility ("show");
+    toggleVisibility (hole);
     
     gameOver();
   }, delay);
@@ -199,7 +200,6 @@ function updateTimer() {
 *
 */
 function startTimer() {
-  // TODO: Write your code here
   timer = setInterval(updateTimer, 1000);
   return timer;
 }
@@ -213,7 +213,6 @@ function startTimer() {
 *
 */
 function whack(event) {
-  // TODO: Write your code here.
    updateScore();
   return points;
 }
@@ -248,6 +247,7 @@ function setDuration(duration) {
 function stopGame(){
   // stopAudio(song);  //optional
   clearInterval(timer);
+  time = 20; 
   return "game stopped";
 }
 
@@ -258,8 +258,11 @@ function stopGame(){
 *
 */
 function startGame(){
-  setDuration(10);
+  setDuration(time);
   showUp();
+  clearScore ();
+  setEventListeners ();
+  startTimer ();
   return "game started";
 }
 
